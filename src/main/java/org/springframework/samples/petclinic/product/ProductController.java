@@ -37,8 +37,8 @@ public class ProductController {
     @PostMapping("/product/create")
     public ModelAndView saveAddedProduct(@Valid Product p){
         productService.save(p);
-        ModelAndView result = new ModelAndView("redirect:/welcome")
-        result.addObject("message", "Product created sucessfully!")
+        ModelAndView result = new ModelAndView("redirect:/welcome");
+        result.addObject("message", "Product created sucessfully!");
         return new ModelAndView("redirect:/welcome");
 
     } 
