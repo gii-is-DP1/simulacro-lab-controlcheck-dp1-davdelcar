@@ -35,11 +35,17 @@ public class ProductController {
     }
 
     @PostMapping("/product/create")
-    public ModelAndView saveAddedProduct(@Valid Product p){
-        productService.save(p);
-        ModelAndView result = new ModelAndView("redirect:/welcome");
-        result.addObject("message", "Product created sucessfully!");
-        return new ModelAndView("redirect:/welcome");
+    public ModelAndView saveAddedProduct(@Valid Product p, BindingResult br){
+        ModelAndView result = new ModelAndView("products/createOrUpdateProductForm");
+        if(br.hasErrors()){
+            result.addObject("product", p);
+            result.addObject("product_types", productService.findAllProductTypes());
+            return result;
+        }else{
+            productService.save(p);
+            result.addObject("message", "Product created sucessfully!");
+        }
+        return new ModelAndView("welcome");
 
     } 
     

@@ -27,7 +27,7 @@ public class Test9 {
     @Autowired
 	private MockMvc mockMvc;
 
-    @WithMockUser(value = "spring")
+    @WithMockUser(value = "spring", authorities = {"admin"})
     @Test
 	void testInitCreationForm() throws Exception {
 		mockMvc.perform(get("/product/create")).andExpect(status().isOk())
